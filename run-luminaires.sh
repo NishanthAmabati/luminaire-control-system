@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 cd "$HOME/.luminaire-control/"
-/usr/bin/python3 pi-server &
+pi-server &
 
 while ! /usr/bin/pgrep -x "Xorg" > /dev/null; do
   /usr/bin/sleep 10
