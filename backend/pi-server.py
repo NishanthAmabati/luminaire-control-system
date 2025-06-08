@@ -34,7 +34,7 @@ handler = logging.handlers.TimedRotatingFileHandler(
 logging.basicConfig(
     level=getattr(logging, config["logging"]["level"]),
     format="%(asctime)s [%(levelname)s] - %(message)s",
-    handlers=[handler, logging.StreamHandler()]
+    handlers=[handler]
 )
 
 # Initial state for WebSocket clients
