@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+        }
+        #log-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #log-table th, #log-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #log-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <table id="log-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>IP</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody id="log-body"></tbody>
+    </table>
+    <button onclick="refreshLogs()">Refresh</button>
+
+    <script>
+        const websocket = new WebSocket('ws://localhost:5000');
+        function refreshLogs() {
+            websocket.send(JSON.stringify({ type: "ping" })); // Trigger state update
+            websocket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                const tbody = document.getElementById('log-body');
+                tbody.innerHTML = '';
+                data.acklog.forEach(log => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${log.timestamp}</td><td>${log.ip}</td><td>${log.message}</td>`;
+                    tbody.appendChild(row);
+                });
+            };
+        }
+        setInterval(refreshLogs, 5000); // Auto-refresh every 5 seconds
+        refreshLogs(); // Initial load
+    </script>
+</head>
+</html>

@@ -1,0 +1,32 @@
+# Server Configuration
+server:
+  host: "0.0.0.0"
+  port: 5250
+  websocket_host: "0.0.0.0"
+  websocket_port: 5000
+  max_connections: 350
+
+# Luminaire Operations Configuration
+luminaire_operations:
+  min_cct: 3500
+  max_cct: 6500
+  min_intensity: 0
+  max_intensity: 500
+  inactivity_threshold: 30
+  send_timeout: 2.0
+  max_retries: 3
+  max_workers: 300  # Increased for 200+ luminaires
+  scene_directory: "scenes"
+  total_intervals: 8640
+  scheduler_update_interval: 1.0  # Seconds between scheduler updates
+  log_basic_max_entries: 50
+  log_advanced_max_entries: 100
+  cleanup_interval: 30  # Seconds between stale device cleanups
+
+# Logging Configuration
+logging:
+  level: "DEBUG"
+  filename_template: "%Y%m%d%H%M%S.log"
+  rotation_when: "midnight"
+  rotation_interval: 1
+  rotation_backup_count: 30
