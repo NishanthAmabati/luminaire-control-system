@@ -6,4 +6,4 @@ cd "$HOME/.luminaire-control/"
 while ! /usr/bin/pgrep -x "lxsession" > /dev/null; do
   /usr/bin/sleep 10
 done
-/usr/bin/snap run firefox localhost:3000
+/usr/bin/firefox localhost:3000
