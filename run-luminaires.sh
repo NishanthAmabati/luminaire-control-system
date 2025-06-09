@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
 cd "$HOME/.luminaire-control/"
-pi-server &
+./pi-server &
 
-while ! /usr/bin/pgrep -x "Xorg" > /dev/null; do
+while ! /usr/bin/pgrep -x "lxsession" > /dev/null; do
   /usr/bin/sleep 10
 done
-/usr/bin/firefox localhost:3000
+/usr/bin/snap run firefox localhost:3000
